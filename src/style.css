@@ -1,0 +1,116 @@
+.button{
+	font-size: 0.8rem;
+	font-weight: 900;
+	outline: none;
+	border: none;
+	background-color: #1d1d1d;
+	color: aliceblue;
+	padding: 13px 30px;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+.button: hover{
+	background-color: lightskyblue;
+
+}
+.single-product input{
+	width: 50px;
+	height: 40px;
+	padding-left: 10px;
+	font-size: 16px;
+	margin-right: 10px;
+}
+.single-product input:focus{
+	outline: none;
+}
+.single-product .buy-btn{
+	background-color: dodgerblue;
+	opacity: 1;
+	transition: 0.4s all;
+	color: white;
+	border-radius: 10px;
+}
+
+.single-product .buy-btn: hover {
+	background-color: black;
+}
+.cart table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.cart .product-info{
+	display: flex;
+	flex-wrap: wrap;
+
+}
+
+.cart th{
+	text-align: left;
+	padding: 10px 20px;
+	color: white;
+	background-color: mediumblue;
+}	
+.cart td{
+	padding: 10px 20px;
+}
+.cart td img{
+	width: 100px;
+	height: 100px;
+	
+}
+
+.cart td input{
+	width: 50px;
+	height: 30px;
+	padding: 5px;
+
+} 
+.cart td a{
+	color: mediumblue;
+
+}
+.cart .remove-btn{
+	color: mediumblue;
+	text-decoration: none;
+	font-size: 15px;
+	width: 100%;
+}
+.cart .edit-btn{
+	color: mediumblue;
+	text-decoration: none;
+	font-size: 15px;
+	width: 100%;
+}
+.cart .product-info p{
+	margin: 3px;
+}
+.cart-total{
+	display: flex;
+	justify-content: flex-end;
+
+}
+.cart-total table{
+	width: 100%;
+	max-width: 500px;
+	border-top: 3px solid mediumblue;
+
+}
+
+td:last-child{
+	text-align: right;
+}
+th:last-child{
+	text-align: right;
+}
+.checkout-container{
+	display: flex;
+	justify-content: flex-end;
+}
+.checkout-btn{	
+	background-color: mediumblue;
+	color: white;
+
+}
+
+
+

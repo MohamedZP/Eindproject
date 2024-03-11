@@ -23,7 +23,7 @@
             include "./functions/userFunctions.php";
     		session_start();
     	
-            $query = "SELECT * FROM tblgebruikers ORDER BY gebruikerid";
+            $query = "SELECT * FROM tblgebruikers WHERE admin=0";
             $result = $mysqli->query($query);
             while ($row = $result->fetch_assoc()) {
         echo '

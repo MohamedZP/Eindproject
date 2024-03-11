@@ -18,10 +18,17 @@
 }
 
 if (isset($_POST['submit'])) {
-	if ($_POST['email'] == "admin@admin.com" && $_POST['password'] == "admin") {
+	 if(checkIfAdmin($mysqli,$_POST['email'])){
+                $_SESSION["admin"] = "true";
+                $_SESSION['gebruikersid'] = getGebruikersid($mysqli,$_POST['email']);
+               	$_SESSION["login"]= $_SESSION['gebruikersid'] ;
+                header('Location: admin.php');
+             
+	/*if ($_POST['email'] == "admin@admin.com" && $_POST['password'] == "admin") {
 		$_SESSION["login"] = "admin";
 		header('Location: admin.php');
-	} else {
+	} */
+	}else {
 
 if(isset($_POST['submit'])){
     $_SESSION['email'] = $_POST['email'];
@@ -48,8 +55,7 @@ if(isset($_POST['submit'])){
     }
 }
 }
-}
-   
+  } 
 ?>
 
 	

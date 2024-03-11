@@ -23,7 +23,7 @@ if(!isset($_SESSION['login'])){
 
 if (isset($_POST['submit'])) {
     $productid =$_POST['productid'];
-	$naam= $_POST['naam'];
+	 $naam= $_POST['naam'];
   	$prijs= $_POST['prijs'];
   	$beschrijving= $_POST['beschrijving'];
   	$categorie= $_POST['categorie'];
