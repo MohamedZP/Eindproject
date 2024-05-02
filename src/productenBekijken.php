@@ -41,7 +41,7 @@ include'connect.php';
 ?>
 
 <h1 class="text-center pb-8"><strong>Bekijk de producten</strong></h1>
-    <section id="search" class="my-5 py-5 ms-2">
+    <section id="search" class="col-lg-3 col-md-3 col-sm-12">
       <div class="container mt-5 py-5">
         <p>Search Products</p>
         <hr>
@@ -78,7 +78,7 @@ include'connect.php';
           <div class="col-lg-12 col-md-12 col-sm-12">
             
             <p>Prijs</p>
-            <input type="range" class="form-range w-50" name="price" value="25000" min="1" max="50000" id="customRange" oninput="document.getElementById('selectedPrice').innerHTML = 'Selected price: €' + this.value">
+            <input type="range" class="form-range w-50" name="price" value="25000" min="1" max="50000" id="customRange" oninput="var str = document.getElementById('selectedPrice').innerHTML = 'Selected price: €' + this.value">
             <div>
               <span id="selectedPrice">Selected price: €25000</span>
             </div>
