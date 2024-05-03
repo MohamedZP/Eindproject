@@ -41,6 +41,7 @@ if (isset($_POST['add_to_cart'])) {
       'quantity' => $_POST['quantity']  
     );
     $_SESSION['cart'][$_POST['productid']] = $product_array;
+    $_SESSION["quan"] = $_POST['quantity'];
     }else{
 
       //product is al toegevoegd in de cart
@@ -65,8 +66,7 @@ if (isset($_POST['add_to_cart'])) {
       'image' => $image,
       'quantity' => $quantity
       //array om alle data te verzamelen  
- 
-    );
+ $_SESSION["quan"] = $_POST['quantity'];);
 
  
     $_SESSION['cart'][$productid] = $product_array;
@@ -97,7 +97,7 @@ calculateTotalCart();
 
   //return array back its place
   $_SESSION['cart'][$productid] = $product_array;
-
+$_SESSION["quan"] = $_POST['quantity'];
   // edit calculate total
   calculateTotalCart();
 
@@ -251,9 +251,15 @@ echo '
 </div>
 
 <div class="checkout-container">
-  <button class="btn checkout-btn">Checkout</button>
+  <button class="btn checkout-btn" name="submit">Checkout</button>
 </div>
-
+<?php
+if (isset($_POST['submit'])) {
+    $selectedProductId = $_POST['productid'];
+    header("Location: checkout.php?id=" . $selectedProductId);
+    exit();
+ } 
+ ?>
 
 
   </section>
