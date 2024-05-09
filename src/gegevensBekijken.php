@@ -40,8 +40,6 @@
   <br>
   <p class="title">' . $row['email'] . '</p>
   <br>
-  <p>Wachtwoord: ' . $row['wachtwoord'] . '</p>
-  <br>
   <p> ' . $row['beschrijving'] . '</p>
   <br>
   <br>

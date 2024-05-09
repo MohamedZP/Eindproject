@@ -11,6 +11,22 @@
 <body>
 	<?php
 	 include "connect.php";
+
+   function calculateTotalCart(){
+  $total = 0;
+
+  foreach($_SESSION['cart'] as $key => $value){
+    $product =  $_SESSION['cart'][$key];
+
+    $price = $product['price'];
+    $quantity = $product['quantity'];
+    $total = $total + ($price * $quantity);
+
+
+  }
+  $_SESSION['total'] = $total;
+}
+
       
      
   session_start();
@@ -18,13 +34,16 @@
   header('location: index.php');
   return;
 };
+if (!isset($_POST['productid']) AND !isset($_POST['quantity']) AND !isset($_POST['price']) ) {
 
-   /*$sql = "INSERT INTO tblcart (productid, gebruikerid, aantal ) VALUES ('".$_POST['productid']."','".$_SESSION['login']."','" .$_POST['quantity']."')";
+}else{
+
+   $sql = "INSERT INTO tblcart (productid, gebruikerid, aantal, prijs ) VALUES ('".$_POST['productid']."','".$_SESSION['login']."','" .$_POST['quantity']."','".$_POST['price']."' )";
   if ($mysqli -> query($sql)) {
     echo "Succesvol toegevoegd";
   }else{
     echo "error";
-  }*/
+  }
 if (isset($_POST['add_to_cart'])) {
   if (isset($_SESSION['cart'])) {
     //if user has already something in cart
@@ -41,7 +60,6 @@ if (isset($_POST['add_to_cart'])) {
       'quantity' => $_POST['quantity']  
     );
     $_SESSION['cart'][$_POST['productid']] = $product_array;
-    $_SESSION["quan"] = $_POST['quantity'];
     }else{
 
       //product is al toegevoegd in de cart
@@ -64,9 +82,8 @@ if (isset($_POST['add_to_cart'])) {
       'name' => $naam,
       'price' => $prijs,
       'image' => $image,
-      'quantity' => $quantity
+      'quantity' => $quantity);
       //array om alle data te verzamelen  
- $_SESSION["quan"] = $_POST['quantity'];);
 
  
     $_SESSION['cart'][$productid] = $product_array;
@@ -90,6 +107,7 @@ calculateTotalCart();
   $productid = $_POST['productid'];
   $quantity = $_POST['quantity'];
 
+
   // get the product array from the session
   $product_array = $_SESSION['cart'][$productid];
   //update product quantity
@@ -97,30 +115,13 @@ calculateTotalCart();
 
   //return array back its place
   $_SESSION['cart'][$productid] = $product_array;
-$_SESSION["quan"] = $_POST['quantity'];
   // edit calculate total
   calculateTotalCart();
 
 
 
 }
-
-
-function calculateTotalCart(){
-  $total = 0;
-
-  foreach($_SESSION['cart'] as $key => $value){
-    $product =  $_SESSION['cart'][$key];
-
-    $price = $product['price'];
-    $quantity = $product['quantity'];
-    $total = $total + ($price * $quantity);
-
-
-  }
-  $_SESSION['total'] = $total;
 }
-
 
 
 ?>
@@ -251,18 +252,24 @@ echo '
 </div>
 
 <div class="checkout-container">
-  <button class="btn checkout-btn" name="submit">Checkout</button>
+ <?php 
+ if (!isset($_POST['productid'])) {
+   
+ }else{
+ echo '  <button class="btn checkout-btn" name="submit" onclick="openCheck('.$_POST['productid'].')">Checkout</button>
+';
+}
+  ?> 
 </div>
-<?php
-if (isset($_POST['submit'])) {
-    $selectedProductId = $_POST['productid'];
-    header("Location: checkout.php?id=" . $selectedProductId);
-    exit();
- } 
- ?>
+
 
 
   </section>
-
+<script type="text/javascript">
+  function openCheck(id) {
+    window.location.href = "checkout.php?id=" + id;
+   // window.alert(id);
+  }
+</script>
 </body>
 </html>

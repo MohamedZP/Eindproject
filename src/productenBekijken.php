@@ -40,17 +40,19 @@ include'connect.php';
 }
 ?>
 
-<h1 class="text-center pb-8"><strong>Bekijk de producten</strong></h1>
+<h1 class="text-center pb-8"><strong>PRODUCTS</strong></h1>
     <section id="search" class="col-lg-3 col-md-3 col-sm-12">
       <div class="container mt-5 py-5">
         <p>Search Products</p>
         <hr>
       </div>
-
+      <div class="sidebar">
       <form method="post" action="productenBekijken.php">
         <div class="row mx-auto container">
           <div class="col-lg-12 col-md-12 col-sm-12">
             
+ 
+    
             <p>Merken</p>
             <?php  
             $query = "SELECT * FROM tblproducten GROUP BY categorie";
@@ -72,6 +74,8 @@ include'connect.php';
           </div>
         </div>
 
+        
+
 
         
         <div class="row mx-auto container mt-5">
@@ -90,6 +94,7 @@ include'connect.php';
         </div>
 
       </form>
+      </div>
     </section>
 	 
         <?php

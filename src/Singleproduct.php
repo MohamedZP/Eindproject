@@ -67,7 +67,7 @@ if (isset($_GET['productid'])) {
 	<button class="buy-btn" type = "submit" name = "add_to_cart">Add to Cart</button>
 	</form>
 	<h4 class="mt-5 mb-5">Product details</h4>
-	<h5 class="mt-5 mb-5"><a href="Rating.php">Product raten</a></h5>
+	<h5 class="mt-5 mb-5"><a href="Rating.php?productid= '.$row["productid"].'">Product raten</a></h5>
 	<span> '.$row['beschrijving'].'</span>
 </div>
 
