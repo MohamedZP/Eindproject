@@ -20,16 +20,26 @@
 include'connect.php';
   
   if (isset($_POST['search'])) {
-    // dit laat de producten zien die worden gezocht.
-    $categorie = $_POST['category'];
+    if (!empty($_POST['category']) && !empty($_POST['price'])) {
+      $category = $_POST['category'];
+      $price = $_POST['price'];
+      // Query met categorie en prijs te filteren
+      $stmt = $mysqli->prepare("SELECT * FROM tblproducten WHERE categorie = ? AND prijs <= ?");
+      $stmt->bind_param("si", $category, $price);
+      $stmt -> execute();
+
+      $products = $stmt -> get_result();
+      
+  }elseif (!empty($_POST['price'])) {
+    // Enkel de prijs is geselecteerd
     $price = $_POST['price'];
-    
-    $stmt = $mysqli->prepare("SELECT * FROM tblproducten WHERE categorie =? AND prijs <=?");
-    $stmt -> bind_param("si", $categorie, $price);
+    // Query om enkel op prijs te filteren
+    $stmt = $mysqli->prepare("SELECT * FROM tblproducten WHERE prijs <= ?");
+    $stmt->bind_param("i", $price);
     $stmt -> execute();
 
     $products = $stmt -> get_result();
-      
+  }
   }else{
   // dit laat alle producten zien
   $stmt = $mysqli->prepare("SELECT * FROM tblproducten");
@@ -41,11 +51,13 @@ include'connect.php';
 ?>
 
 <h1 class="text-center pb-8"><strong>PRODUCTS</strong></h1>
-    <section id="search" class="col-lg-3 col-md-3 col-sm-12">
-      <div class="container mt-5 py-5">
+
+<div class="container mx-5 mt-2">
+  <section id="search" class="col-lg-3 col-md-3 col-sm-12">
+    <div class="container mt-5 py-5">
         <p>Search Products</p>
         <hr>
-      </div>
+        </div>
       <div class="sidebar">
       <form method="post" action="productenBekijken.php">
         <div class="row mx-auto container">
@@ -59,8 +71,9 @@ include'connect.php';
             $result = $mysqli->query($query);
             while ($row = $result->fetch_assoc()) {
             echo '
+
               <div class="form-check">
-                <input class="form-check-input" type="radio" value="'.$row['categorie'].'" name="category" id= "category_one" checked >
+                <input class="form-check-input" type="radio" value="'.$row['categorie'].'" name="category" id= "category_one"  >
                 <label class="form-check-label" for="flexRadioDefault1">
                   '.$row['categorie'].'
                 </label>
@@ -96,7 +109,9 @@ include'connect.php';
       </form>
       </div>
     </section>
-	 
+	  </div>
+    <div>
+    <section id="products" class="col-lg-9 col-md-9 col-sm-12">
         <?php
     		include "connect.php";
         include "./functions/userFunctions.php";
@@ -124,5 +139,7 @@ include'connect.php';
         ';
 };
 ?>
+       </section>
+
 </body>
 </html>

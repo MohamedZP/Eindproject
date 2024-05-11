@@ -23,11 +23,6 @@ if (isset($_POST['submit'])) {
                 $_SESSION['gebruikersid'] = getGebruikersid($mysqli,$_POST['email']);
                	$_SESSION["login"]= $_SESSION['gebruikersid'] ;
                 header('Location: admin.php');
-             
-	/*if ($_POST['email'] == "admin@admin.com" && $_POST['password'] == "admin") {
-		$_SESSION["login"] = "admin";
-		header('Location: admin.php');
-	} */
 	}else {
 
 if(isset($_POST['submit'])){

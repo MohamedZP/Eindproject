@@ -33,11 +33,7 @@ foreach ($_SESSION["cart"] as $key => $value) {
         ],
     ];
 }
-echo $prodnaam;
-echo $profoto;
-echo $prijs;
-echo $proid;
-echo $hoeveelheid;
+print_r($items);
 
 
 ?>

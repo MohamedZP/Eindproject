@@ -111,6 +111,24 @@ th:last-child{
 	color: white;
 
 }
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.col-lg-3 {
+ 	flex-basis: calc(25% - 20px);
+    margin-right: 20px;
+}
+.col-lg-9 {
+    flex-basis: calc(75% - 20px);
+}
+#search {
+    flex: 1;
+}
+#products {
+    flex: 3;
+}
 
 
 

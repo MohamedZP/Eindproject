@@ -4,7 +4,7 @@ include "connect.php";
 session_start();
 
 $userid = $_SESSION["login"];
-$id = $_GET["id"];
+$id = $_GET["userid"];
 
 $sql = "SELECT * FROM tblproducten WHERE productid = $id";
 $result = $mysqli->query($sql);
