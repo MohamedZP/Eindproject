@@ -1,3 +1,37 @@
+<?php
+session_start();
+include 'connect.php';
+$_SESSION['datum'] = date("Y-m-d H:i:s");
+
+$query = "SELECT * from tblcart where gebruikerid ='".$_SESSION['login']."'";
+
+    $result = $mysqli->query($query);
+
+    while($row = $result->fetch_assoc()) {
+
+      $miniquery = "SELECT * from tblproducten where productid ='".$row['productid']."'";
+
+      $miniresult = $mysqli->query($miniquery);
+
+      while($row2 = $miniresult->fetch_assoc()) {
+
+            $insertQuery = "INSERT INTO tblaankoop(gebruikerid, productid, productnaam, quantity, prijs, totaal, datum)  VALUES ('".$_SESSION['login']."', '".$row['productid']."', '".$row2['naam']."', '".$row['aantal']."', '".$row2['prijs']."', '".$row2['prijs'] * $row['aantal']."', '".$_SESSION['datum']."')";
+            if ($mysqli->query($insertQuery)) {
+
+            } else {
+                echo "<script>alert('Product is niet verplaatst naar tblaankoop');</script>";
+                var_dump($mysqli);
+            }
+        } 
+}
+$sql2 = "DELETE FROM tblcart WHERE gebruikerid='".$_GET['userid']."'";
+if ($mysqli->query($sql2)) {
+
+} else {
+    echo "<script>alert('Product is niet verwijderd uit de cart');</script>";
+};
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +60,17 @@
             
             <div class="divider divider-horizontal"></div>
             
-            <div class="grid h-20 flex-grow card rounded-box place-items-center mx-2"><label><a class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-box py-3" href="Betalingsbewijs.php">PROOF OF PAYMENT</a></label></div>
+            <?php 
+           
+                echo '<div class="grid h-20 flex-grow card rounded-box place-items-center mx-2"><label><a class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-box py-3" href="Betalingsbewijs.php?userid='.$_SESSION['login'].'">PROOF OF PAYMENT</a></label></div>';
+           
+            
+        
+
+            ?>
             </div> 
         </div>
     </div>
   </div>
 </body>
 </html>
-

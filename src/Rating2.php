@@ -9,16 +9,18 @@ if (isset($_POST['rating_data'])) {
 		':user_name'     =>  $_POST['user_name'],
 		':user_data'     =>  $_POST['rating_data'],
 		':user_review'   =>  $_POST['user_review'],
-		':datetime'      =>  time()
+		':datetime'      =>  date("Y-m-d H:i:s")
 
 	);
 
 	$sql = "INSERT INTO tblrating(user_name, user_rating, user_review, datetime) 
 			VALUES (:user_name, :user_data, :user_review, :datetime )";
 
-	$statement = $connect-> prepare($sql);
+	$statement = $mysqli-> prepare($sql);
 
 	$statement -> execute($data);
+
+	var_dump($sql);
 
 	echo "Your review & rating is succesfully submitted";
 
@@ -41,9 +43,9 @@ if (isset($_POST['action'])) {
 	foreach ($result as $row) {
 		
 		$review_content[] = array(
-			'user_name' => $row["user_name"]
-			'user_review' => $row["user_review"]
-			'rating' => $row["rating"]
+			'user_name' => $row["user_name"],
+			'user_review' => $row["user_review"],
+			'rating' => $row["rating"],
 			'datetime' => date('l js, F Y h:i:s A', $row["datetime"])
 
 		);

@@ -16,7 +16,7 @@ include "functions/userFunctions.php";
                 $voornaam = $_POST['fname'];
                 $achternaam = $_POST['name'];
                 $wachtwoord = $_POST['password'];
-                $wachtwoord = password_hash($password, PASSWORD_DEFAULT);
+                $wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
                 $email = $_POST['email'];
                 $beschrijving = $_POST['beschrijving'];
                 $upload_dir= $_SERVER['DOCUMENT_ROOT']."/Eindproject/public/img/";

@@ -17,9 +17,9 @@
   return;
 };
 
-   function calculateTotalCart(){
+  function calculateTotalCart(){
     global $mysqli;
-  $totalprijs = 0;
+    $totalprijs = 0;
     $sql = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."'";
     $result = $mysqli->query($sql);
     while($row = $result->fetch_assoc()) {
@@ -29,77 +29,61 @@
     $_SESSION['total'] = $totalprijs;
 }
 
-if (isset($_POST['edit_quantity'])) {
-echo $_POST['quantity'];
-  $sql6 = "UPDATE tblcart SET aantal ='".$_POST['quantity']."' WHERE productid = '".$_GET['productid']."'";
-  if ($mysqli->query($sql6)) {
-
-  } else {
-    print("Aantal niet geupdate");
-  };
- var_dump($sql6);
-//calculate total
-  calculateTotalCart();
-
-}
-
-     
+if (isset($_POST['edit_quantity']) AND isset($_POST['quantity']) AND isset($_POST['edit_productid'])) {
+    $sql6 = "UPDATE tblcart SET aantal = '".$_POST['quantity']."' WHERE productid = '".$_POST['edit_productid']."' AND gebruikerid = '".$_GET['gebruikerid']."'";
+    if ($mysqli->query($sql6)) {
+      echo "<script>alert('Product is geupdate');</script>";
+    } else {
+      echo "<script>alert('Product is niet geupdate');</script>";
+    };
+   
+  //calculate total
+    calculateTotalCart();
+};
  
-
-
-
-if(isset($_POST['remove_product'])) {
+if(isset($_POST['remove_product']) AND isset($_POST['remove_productid'])) {
 //remove product
-$sql7 = "DELETE FROM tblcart productid = '".$_GET['productid']."'";
-//remove calculate total 
-calculateTotalCart(); }
+$sql7 = "DELETE FROM tblcart WHERE productid = '".$_POST['remove_productid']."' AND gebruikerid = '".$_GET['gebruikerid']."'";
+if ($mysqli->query($sql7)) {
+  echo "<script>alert('Product is verwijderd');</script>";
+} else {
+  echo "<script>alert('Product is niet verwijderd');</script>";
+};
 
+//remove calculate total 
+calculateTotalCart(); 
+};
 
 
 
 if (!isset($_POST['productid']) || !isset($_POST['quantity']) || !isset($_POST['price']) ) {
-  if (isset($_SESSION['cart'])) {
-    $sql2 = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."'";
-    if ($mysqli->query($sql2)) {
-      foreach($mysqli->query($sql2) as $db_row) {
-        foreach($_SESSION['cart'] as $key => $value) {
-          if ($db_row['productid'] == $value['productid']) {
-            //echo "'".$db_row['productid']."' gevonden in de database." ;
-          /*} else {
-            echo "'".$value['productid']."' niet gevonden in de database";
-          */};
-        }
-      };
-    };
-  } else {
-    $totalprijs = 0;
-    $sql3 = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."'";
-    $result = $mysqli->query($sql3);
-    while($row = $result->fetch_assoc()) {
-      $totalprijs += $row['prijs']*$row['aantal'];
-    };
-
-    $_SESSION['total'] = $totalprijs;
+  $totalprijs = 0;
+  $sql3 = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."'";
+  $result = $mysqli->query($sql3);
+  while($row = $result->fetch_assoc()) {
+    $totalprijs += $row['prijs']*$row['aantal'];
   };
-}
+  $_SESSION['total'] = $totalprijs;
+};
 
 
 if (isset($_POST['add_to_cart'])) {
     $moettoevoegen = true;
-    $sql4 = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."'";
+    $sql4 = "SELECT * from tblcart where gebruikerid = '".$_SESSION['login']."' AND productid = '".$_POST['productid']."'";
     $result = $mysqli -> query($sql4);
     if (mysqli_num_rows($result) > 0) {
     
     while ($row = $result->fetch_assoc()) {
       if ($row['productid'] == $_POST['productid']) {
-        echo "Product is er al";
+        echo "<script>alert('Product is al in de cart');</script>";
         $moettoevoegen = false;
       }else{
         $moettoevoegen = true;
       }
     }
-  } else {
-
+  }
+    
+if (mysqli_num_rows($result) <= 0) {
    if ($moettoevoegen == true) {
          //if this is the first product
     $productid = $_POST['productid'];
@@ -110,12 +94,13 @@ if (isset($_POST['add_to_cart'])) {
 
     $sql5 = "INSERT INTO tblcart (productid, gebruikerid, aantal, prijs ) VALUES ('".$_POST['productid']."','".$_SESSION['login']."','" .$_POST['quantity']."','".$_POST['price']."')";
     if ($mysqli -> query($sql5)) {
-      echo "Succesvol toegevoegd";
+      echo "<script>alert('Product is toegevoegd');</script>";;
     } else{
-      var_dump($sql4);
-    }    
+      var_dump($sql5);
+    }
+  } 
+  calculateTotalCart();    
   }
-}
 }
 
   
@@ -201,7 +186,7 @@ if (isset($_POST['add_to_cart'])) {
     <?php 
 
     
-   $query = "SELECT * from tblcart where gebruikerid ='".$_SESSION['login']."'";
+   $query = "SELECT DISTINCT * from tblcart where gebruikerid ='".$_SESSION['login']."'";
     $result = $mysqli->query($query);
     while($row = $result->fetch_assoc()) {
       $miniquery = "SELECT * from tblproducten where productid ='".$row['productid']."'";
@@ -216,22 +201,24 @@ if (isset($_POST['add_to_cart'])) {
             <p>'.$row2['naam'].'</p>
             <small><span>€</span> '.$row2['prijs'].'</small>
             <br>
-            <form method="post" action="cart.php">
-           <input type="hidden" name="productid" value="'.$row2['productid'].'"/>
-           <button type="submit" class="edit-btn" name="edit_quantity" value="Delete"><a href="cart.php?productid='.$row2['productid'].'">Delete</a></button>
+            <form method="post" action="Cart.php?gebruikerid='.$row['gebruikerid'].'">
+           <input type="hidden" name="remove_productid" value="'.$row2['productid'].'"/>
+           <input type="submit" class="remove-btn" name="remove_product" value="Delete"></input>
   
            </form>
+           
           
           </div>
         </div>
           </td>
         
         <td>
-          
-          <form method="post" action="cart.php">
-     <input type="number" name ="quantity" value="'.$row['aantal'].'" min = 1>
-      <button type="submit" class="edit-btn" name="edit_quantity" value="Wijzigen"><a href="cart.php?productid='.$row['productid'].'">Wijzigen</a></button>
+          <form method="post" action="Cart.php?gebruikerid='.$row['gebruikerid'].'">
+          <input type="hidden" name="edit_productid" value="'.$row2['productid'].'"/>
+          <input type="number" name ="quantity" value="'.$row['aantal'].'" min = 1>
+      <input type="submit" class="edit-btn" name="edit_quantity" value="Wijzigen"></input>
    </form>
+          
           
         </td>
    
@@ -269,7 +256,7 @@ if (isset($_POST['add_to_cart'])) {
 <script type="text/javascript">
   function openCheck(id) {
     window.location.href = "checkout.php?userid=" + id;
-   window.alert(id);
+  // window.alert(id);
   }
 </script>
 </body>

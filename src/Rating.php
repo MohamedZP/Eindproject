@@ -174,7 +174,10 @@ include 'connect.php';
 					method:"POST",
 					data:{rating_data: rating_data, user_name: user_name, user_review: user_review},
 					success: function(data) {
-						$("#review_modal").modal(hide);
+						$("#review_modal").modal('hide');
+
+						load_rating_data();
+
 						alert(data);
 					}
 
@@ -225,9 +228,46 @@ include 'connect.php';
 
 							html += '<div class="row mb-3">';
 
+							html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 	 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+' 	   </h3></div></div>';
+
+							html += '<div class="col-sm-11">';
+
+							html += '<div class="card">';
+
+							html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
+
+							html += '<div class="card-body">';
+
+							for(var star = 1; star <= 5; star++){
+
+								var class_name = '';
+
+								if (data.review_data[count].rating >= star){
+
+									class_name = 'text-warning';
+								}else{
+									class_name = 'star-light';
+								}
+
+								html += '<i class="fas fa-star '+class_name+' mr-1 "></i>';
+							}
+
+							html += '<br />';
+
+							html += data.review_data[count].user_review;
 
 							html += '</div>';
+
+							html += '<div class="card-footer text-right">ON '+data.review_data[count].datetime+'</div>';
+
+							html += '</div>';
+
+							html += '</div>';
+
+							html += '</div>';
+
 						}
+						$('#review_content').html(html);
 					}
 				}
 			})

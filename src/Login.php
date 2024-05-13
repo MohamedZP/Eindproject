@@ -28,10 +28,19 @@ if (isset($_POST['submit'])) {
 if(isset($_POST['submit'])){
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['wachtwoord'] = $_POST['password'];
-    $sql = ("SELECT * FROM tblgebruikers WHERE email='".$_SESSION['email']."' and wachtwoord='".$_SESSION['wachtwoord']."'");
+    $sql = ("SELECT * FROM tblgebruikers WHERE email='".$_POST['email']."'");
    		$resultaat = $mysqli->query($sql);
+   		$resultaat = $resultaat->fetch_assoc();
 			if($resultaat) {
-				if (mysqli_num_rows($resultaat) == 1) {
+					var_dump($_POST['password'], $resultaat['wachtwoord']);
+					$correct = password_verify($_POST['password'], $resultaat['wachtwoord']);
+
+var_dump($correct);
+					if (!$correct) {
+						// header('Location: Login.php');
+						// exit;
+						die();
+					}
 					$_SESSION['gebruikersid'] = getGebruikersid($mysqli,$_POST['email']);
              		$_SESSION["login"]= $_SESSION['gebruikersid'] ;
 					
@@ -48,7 +57,6 @@ if(isset($_POST['submit'])){
 					 ';
 			}
     }
-}
 }
   } 
 ?>
@@ -71,14 +79,9 @@ if(isset($_POST['submit'])){
                 </div>
 					<div class="flex items-start">
 						<div class="flex items-start">
-							<div class="flex items-center h-5">
-								<input id="remember" aria-describedby="remember" type="checkbox" class="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
-                            </div>
-								<div class="text-sm ml-3 mr-11">
-									<label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-								</div>
+						
 							</div class = "text-sm ml-10">
-							<a href="WijzigenW.php" class="text-sm text-blue-700 hover:underline ml-auto dark:text-blue-500">Wachtwoord vergeten?</a>
+							
 						</div>
 						<button type="submit" name ="submit"class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Inloggen</button>
 						<div class="text-sm font-medium text-gray-500 dark:text-gray-300">

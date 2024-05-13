@@ -48,6 +48,11 @@
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li><a href= "gegevensBekijken.php">Klanten bekijken</a></li>
         <li><a href= "productToevoegen.php">Product Toevoegen</a></li>
+         <li>
+          <a href = "BetalingenAdmin.php" >
+            Betalingen
+          </a>
+        </li>
         <li><a href="loguit.php">Logout</a></li>
       </ul>
     ';
