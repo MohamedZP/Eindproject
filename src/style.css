@@ -86,13 +86,15 @@
 }
 .cart-total{
 	display: flex;
-	justify-content: flex-end;
+	justify-self: flex-end;
+	
 
 }
 .cart-total table{
 	width: 100%;
 	max-width: 500px;
 	border-top: 3px solid mediumblue;
+	justify-self: flex-end;
 
 }
 

@@ -50,7 +50,12 @@
         <li><a href= "productToevoegen.php">Product Toevoegen</a></li>
          <li>
           <a href = "BetalingenAdmin.php" >
-            Betalingen
+            Bestellingen van klanten 
+          </a>
+        </li>
+        <li>
+          <a href = "VerwijderdeK.php" >
+            Verwijderde klanten
           </a>
         </li>
         <li><a href="loguit.php">Logout</a></li>
@@ -69,9 +74,9 @@
             while ($row = $result->fetch_assoc()) {
         echo '
 
-        <div class="row1">
-        <div class="column"> 
-                <div class="card1 mr-11 h-full">
+        
+        <div class="column pr-6 ps-8"> 
+                <div class="card1  mr-11 h-full">
                     <img class="w-52 h-60 mb-2 mx-auto mt-4" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'">
                     <div class="card-img-overlay d-flex justify-content-end"></div>
                     <div class="card-body">
@@ -96,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
 
       
         ';

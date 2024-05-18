@@ -89,7 +89,7 @@ if (isset($_POST["submit"])) {
 
              <div class="flex flex-col w-full"> 
               <label class="label text-black">Wachtwoord</label>
-              <input type="text" name="wachtwoord" placeholder="Wachtwoord" value = "'.$row["wachtwoord"].'" class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <input type="text" name="wachtwoord" placeholder="Wachtwoord"  class="input input-bordered w-full max-w-md text-black bg-white"/>
             </div>
 
              <div class="flex flex-col w-full"> 

@@ -157,6 +157,11 @@ if (mysqli_num_rows($result) <= 0) {
             <span class="badge">New</span>
           </a>
         </li>
+        <li>
+          <a href = "Betalingen.php?gebruikerid='.$userid.'" class="justify-between">
+            Betalingen
+          </a>
+        </li>
         <li><a href="loguit.php">Logout</a></li>
       </ul>
 
@@ -170,7 +175,7 @@ if (mysqli_num_rows($result) <= 0) {
 </div>
 
 
-	<section class="cart container my-5 py-5">
+	<section class="cart container my-5 py-5 ml-12">
    <div class="container mt-5">
      <h2 class="font-weight-bolde">Your Cart</h2>
      <hr>
@@ -186,7 +191,7 @@ if (mysqli_num_rows($result) <= 0) {
     <?php 
 
     
-   $query = "SELECT DISTINCT * from tblcart where gebruikerid ='".$_SESSION['login']."'";
+   $query = "SELECT * from tblcart where gebruikerid ='".$_SESSION['login']."' ORDER BY productid";
     $result = $mysqli->query($query);
     while($row = $result->fetch_assoc()) {
       $miniquery = "SELECT * from tblproducten where productid ='".$row['productid']."'";
@@ -196,14 +201,16 @@ if (mysqli_num_rows($result) <= 0) {
         <tr>
           <td>
             <div class="product-info">
-              <img class="w-52 h-60 mb-2 mx-auto mt-4" src="../public/img/'.$row2['foto'].'" height = 200>
-            <div>
-            <p>'.$row2['naam'].'</p>
+              <img class="w-52 h-60 mb-2 mx-auto mt-4 ml-1" src="../public/img/'.$row2['foto'].'" height = 200>
+            <div class = " ml-1">
+            <p >'.$row2['naam'].'</p>
             <small><span>€</span> '.$row2['prijs'].'</small>
             <br>
+             <br>
             <form method="post" action="Cart.php?gebruikerid='.$row['gebruikerid'].'">
            <input type="hidden" name="remove_productid" value="'.$row2['productid'].'"/>
-           <input type="submit" class="remove-btn" name="remove_product" value="Delete"></input>
+           <input type="hidden" name="remove_productid" value=""/>
+           <input type="submit" class="remove-btn" name="remove_product" value="Verwijderen"></input>
   
            </form>
            
@@ -213,10 +220,11 @@ if (mysqli_num_rows($result) <= 0) {
           </td>
         
         <td>
+         <br>
           <form method="post" action="Cart.php?gebruikerid='.$row['gebruikerid'].'">
           <input type="hidden" name="edit_productid" value="'.$row2['productid'].'"/>
           <input type="number" name ="quantity" value="'.$row['aantal'].'" min = 1>
-      <input type="submit" class="edit-btn" name="edit_quantity" value="Wijzigen"></input>
+      <input type="submit" class="edit-btn pt-5" name="edit_quantity" value="Wijzigen"></input>
    </form>
           
           
@@ -226,12 +234,17 @@ if (mysqli_num_rows($result) <= 0) {
           <span>€</span>
           <span class="product-price">'.$row2['prijs'] * $row['aantal'].'</span>
         </td>
-        </tr>';
-        };
+        </tr>
+           
+           ';
       };
+      };
+
+
+        
     
     ?>
-   </table>
+    </table>
 <div class="cart-total">
   <table>
     <tr>
@@ -241,10 +254,11 @@ if (mysqli_num_rows($result) <= 0) {
   </table>
 </div>
 
+
 <div class="checkout-container">
  <?php 
 
- echo '  <button class="btn checkout-btn" name="submit" onclick="openCheck('.$_SESSION['login'].')">Checkout</button>
+ echo '  <button class="btn checkout-btn " name="submit" onclick="openCheck('.$_SESSION['login'].')">Checkout</button>
 ';
 
   ?> 

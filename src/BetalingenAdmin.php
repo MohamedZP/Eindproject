@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Betalingen</title>
+  <title>Bestellingen</title>
 </head>
 <body>
   <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a href="index.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
+    <a href="admin.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
   </div>
 
   
@@ -20,6 +20,7 @@
       include "connect.php";
       include "./functions/userFunctions.php";
      session_start();
+    
         
         if (!isset($_SESSION['login'])) {
              echo '<div class="dropdown dropdown-end">
@@ -52,7 +53,12 @@
         <li><a href= "productToevoegen.php">Product Toevoegen</a></li>
          <li>
           <a href = "BetalingenAdmin.php" class="justify-between">
-            Betalingen
+            Bestellingen van klanten
+          </a>
+        </li>
+        <li>
+          <a href = "VerwijderdeK.php" >
+            Verwijderde klanten
           </a>
         </li>
         <li><a href="loguit.php">Logout</a></li>
@@ -65,8 +71,9 @@
         </div>
   </div>
 </div>
+
 <?php  
-$query = "SELECT * from tblaankoop ORDER BY gebruikerid ";
+$query = "SELECT * from tblaankoop ORDER BY aankoopid ";
     $result = $mysqli->query($query);
     while($row = $result->fetch_assoc()) {
       $miniquery = "SELECT * from tblproducten where productid ='".$row['productid']."'";
@@ -79,13 +86,13 @@ $query = "SELECT * from tblaankoop ORDER BY gebruikerid ";
 
         <div class="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             <div class="flex justify-start item-start space-y-2 flex-col">
-                <h1 class="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Order '.$row['aankoopid'].'</h1>
+                <h1 class="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Bestelling '.$row['aankoopid'].'</h1>
                 <p class="text-base dark:text-gray-300 font-medium leading-6 text-gray-600">'.$row['datum'].'</p>
             </div> 
             <div class="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                 <div class="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                     <div class="flex flex-col justify-start items-start dark:bg-gray-800 bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-                        <p class="text-lg md:text-xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800">Customer’s Cart</p>
+                        <p class="text-lg md:text-xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800">Aankoop klant</p>
                         <div class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                             <div class="pb-4 md:pb-8 w-full md:w-40">
                                 <img class="w-full hidden md:block" src="../public/img/'.$row2['foto'].'" />
@@ -94,9 +101,9 @@ $query = "SELECT * from tblaankoop ORDER BY gebruikerid ";
                                 <div class="w-full flex flex-col justify-start items-start space-y-8">
                                     <h3 class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">'.$row2['naam'].'</h3>
                                     <div class="flex justify-start items-start flex-col space-y-2">
-                                        <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Brand: </span> '.$row2['categorie'].'</p>
+                                        <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Merk: </span> '.$row2['categorie'].'</p>
                                         <p class="text-sm dark:text-white leading-none text-gray-800"></p>
-                                        <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Color: </span> '.$row2['kleur'].'</p>
+                                        <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">kleur: </span> '.$row2['kleur'].'</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-between space-x-8 items-start w-full">
@@ -107,7 +114,7 @@ $query = "SELECT * from tblaankoop ORDER BY gebruikerid ";
                             </div>
                         </div>
                 <div class="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
-                    <h3 class="text-xl dark:text-white font-semibold leading-5 text-gray-800">Customer'.$row['gebruikerid'].'</h3>
+                    <h3 class="text-xl dark:text-white font-semibold leading-5 text-gray-800">Klant '.$row['gebruikerid'].'</h3>
                     <div class="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
                         <div class="flex flex-col justify-start items-start flex-shrink-0">
                             <div class="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200  w-full">

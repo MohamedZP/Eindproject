@@ -119,10 +119,9 @@ include'connect.php';
     	
         while ($row = $products->fetch_assoc()) {
         echo '
-          <div class="row1">
-          <div class="column flex space-x-4">
-              <div class="card1">
-                <img class="w-52 h-60 mb-2 mx-auto mt-4" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'">
+            <div class="column flex space-x-4 h-full">
+              <div class="card1 w-full  ">
+                <img class="w-52 h-52 mb-2 mx-auto mt-4" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'">
                   <div class="card-img-overlay d-flex justify-content-end"></div>
                   <div class="card-body">
                   <h4 class="card-title mx-auto">'.$row['naam'].'</h4>
@@ -135,6 +134,7 @@ include'connect.php';
                 </div>
               </div>
             </div>
+
                   
         ';
 };

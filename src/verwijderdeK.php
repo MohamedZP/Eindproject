@@ -17,13 +17,13 @@
   </div>
     </div>
     
-        <h1 class="text-center pb-8"><strong>Bekijk gegevens van de klanten</strong></h1>
+        <h1 class="text-center pb-8"><strong>Bekijk de verwijderde klanten</strong></h1>
         <?php
     		include "connect.php";
             include "./functions/userFunctions.php";
     		session_start();
     	
-            $query = "SELECT * FROM tblgebruikers WHERE admin=0 AND verwijderd = 0";
+            $query = "SELECT * FROM tblgebruikers WHERE admin=0 AND verwijderd = 1";
             $result = $mysqli->query($query);
             while ($row = $result->fetch_assoc()) {
         echo '
@@ -43,7 +43,7 @@
   <p> ' . $row['beschrijving'] . '</p>
   <br>
   <br>
-  <a href = "deleteU.php?gebruikerid=' . $row['gebruikerid'] . '"><button>Verwijderen</button></a>
+  <a href = "Terug.php?gebruikerid=' . $row['gebruikerid'] . '"><button>Terugbrengen</button></a>
 </div>
 </div>
 </div>

@@ -26,7 +26,7 @@ include "functions/userFunctions.php";
    		 move_uploaded_file($file_tmp,$upload_dir.$file_name);
   		}
 
-  	$sql = "INSERT INTO tblgebruikers(voornaam , naam , wachtwoord, email, profielfoto, beschrijving,admin) VALUES ('".$voornaam."', '".$achternaam."', '".$wachtwoord."', '".$email."', '".$file_name."','".$beschrijving."', 0)";
+  	$sql = "INSERT INTO tblgebruikers(voornaam , naam , wachtwoord, email, profielfoto, beschrijving,admin, verwijderd) VALUES ('".$voornaam."', '".$achternaam."', '".$wachtwoord."', '".$email."', '".$file_name."','".$beschrijving."', 0,0)";
   			
   		if($mysqli->query($sql)){
  		
