@@ -58,7 +58,10 @@ include'connect.php';
         <p>Search Products</p>
         <hr>
         </div>
-      <div class="sidebar">
+     
+
+
+
       <form method="post" action="productenBekijken.php">
         <div class="row mx-auto container">
           <div class="col-lg-12 col-md-12 col-sm-12">
@@ -74,6 +77,8 @@ include'connect.php';
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" value="'.$row['categorie'].'" name="category" id= "category_one"  >
+                
+
                 <label class="form-check-label" for="flexRadioDefault1">
                   '.$row['categorie'].'
                 </label>
