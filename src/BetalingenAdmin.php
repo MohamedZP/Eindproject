@@ -57,11 +57,11 @@
           </a>
         </li>
         <li>
-          <a href = "VerwijderdeK.php" >
+          <a href = "verwijderdeK.php" >
             Verwijderde klanten
           </a>
         </li>
-        <li><a href="loguit.php">Logout</a></li>
+        <li><a href="Loguit.php">Logout</a></li>
       </ul>
     ';
   }

@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
 		<div
 		class="bg-white shadow-md border border-gray-200 rounded-lg max-w-screen-2xl p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
 		<form class="space-y-8" action="Login.php" method="post">
-			<h3 class=" text-xl font-medium text-gray-900 dark:text-white ml-14 pr-12 ">Log in op onze website</h3>
+			<h3 class=" text-xl font-medium text-gray-900 dark:text-white ml-14 pr-12 w-80 h-16 p-7">Log in op onze website</h3>
 			<div>
 				<label for="email" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Email:</label>
 				<input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required="">

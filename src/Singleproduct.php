@@ -58,7 +58,7 @@ if (isset($_GET['productid'])) {
 	<h6>Men watch</h6>
 	<h3 class="py-4">'.$row['naam'].'</h3>
 	<h2>€ '.$row['prijs'].'</h2>
-	<form method="post" action="Cart.php">
+	<form method="post" action="cart.php">
 	<input type="hidden" name="productid" value="'.$row['productid'].'">	
 	<input type="hidden" name="image" value="'.$row['foto'].'">	
 	<input type="hidden" name="name" value="'.$row['naam'].'">

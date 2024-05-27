@@ -31,9 +31,22 @@ include 'connect.php';
            if (!isset($_SESSION['login'])) {
             echo 0;
           }else{
-          $sql = "SELECT * FROM tblcart WHERE gebruikerid = '".$_SESSION['login']."'";
-          $result = $mysqli->query($sql);
-          $aantal = mysqli_num_rows($result);
+         $sql = "SELECT * FROM tblcart WHERE gebruikerid = ?";
+$stmt = $mysqli->prepare($sql);
+
+// Check if the preparation was successful
+if ($stmt) {
+    // Bind the session login value to the placeholder
+    $stmt->bind_param("s", $_SESSION['login']);
+    
+    // Execute the prepared statement
+    $stmt->execute();
+    
+    // Get the result
+    $result = $stmt->get_result();
+    
+    // Count the number of rows
+    $aantal = $result->num_rows;
          
 
           if ($aantal > 0) {
@@ -41,6 +54,7 @@ include 'connect.php';
           }else{
             echo 0;
           }
+}
 }
           echo '
             
@@ -109,10 +123,10 @@ include 'connect.php';
         </li>
         <li>
           <a href = "Betalingen.php?gebruikerid='.$userid.'" class="justify-between">
-            Betalingen
+            Bestellingen
           </a>
         </li>
-        <li><a href="loguit.php">Logout</a></li>
+        <li><a href="Loguit.php">Logout</a></li>
       </ul>
 
   ';

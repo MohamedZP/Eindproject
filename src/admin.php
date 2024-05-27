@@ -54,11 +54,11 @@
           </a>
         </li>
         <li>
-          <a href = "VerwijderdeK.php" >
+          <a href = "verwijderdeK.php" >
             Verwijderde klanten
           </a>
         </li>
-        <li><a href="loguit.php">Logout</a></li>
+        <li><a href="Loguit.php">Logout</a></li>
       </ul>
     ';
 }
@@ -70,8 +70,16 @@
         <?php
       
             $sql = "SELECT * FROM tblproducten ORDER BY productid";
-            $result = $mysqli->query($sql);
-            while ($row = $result->fetch_assoc()) {
+$stmt = $mysqli->prepare($sql);
+
+// Voer de query uit
+$stmt->execute();
+
+// Verkrijg het resultaat
+$result = $stmt->get_result();
+
+// Verwerk het resultaat
+while ($row = $result->fetch_assoc()) {
         echo '
 
         
