@@ -45,10 +45,10 @@ echo '<div class="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-aut
         $result2 = $mysqli->query($sql2);
         while($row2 = $result2->fetch_assoc()) {
         echo'
-        <div class="text-gray-700 mb-2">De '.$row2["voornaam"].'  '.$row2["naam"].'</div>
+        <div class="text-gray-700 mb-2">Naam: '.$row2["voornaam"].'  '.$row2["naam"].'</div>
         <div class="text-gray-700 mb-2">123 Main St.</div>
         <div class="text-gray-700 mb-2">Anytown, USA 12345</div>
-        <div class="text-gray-700">'.$row2["email"].'</div>
+        <div class="text-gray-700">Email:'.$row2["email"].'</div>
     </div>';
 }
 echo'

@@ -14,11 +14,62 @@
     <div class="flex-1">
       <a href="index.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
     </div>
+   
+    
+    <?php 
+      include "connect.php";
+      include "./functions/userFunctions.php";
+     session_start();      
+   
+        
+        if (!isset($_SESSION['login'])) {
+             echo '<div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img src="/Eindproject/public/img/profile_picture">
+        </div>
+      </label>
+             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="login.php">Login</a><li>
+        </ul>
+       ';
+ 
+       }else{
+       
+               echo '
+                <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">';
+
+           $userid = $_SESSION["login"];
+          $profielfoto = getProfilePicture($mysqli, $userid);
+          echo '<img src="../public/img/'.$profielfoto.'"/>';
+
+        echo '
+        </div>
+      </label>  
+               <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+               <li>
+          <a href = "profiel.php" class="justify-between">Profiel</a>
+        </li>
+         <li>
+          <a href = "betalingen.php" class="justify-between">Bestellingen</a>
+        </li>
+        <li><a href="loguit.php">Log uit</a></li>
+      </ul>
+
+  ';
+}
+
+
+?>
+        
+  </div>
+</div>
   </div>
 
 
     <?php 
-include'connect.php';
   
   if (isset($_POST['filter'])) {
     if (!empty($_POST['category']) && !empty($_POST['price'])) {
@@ -103,9 +154,7 @@ include'connect.php';
       <section id="products" class="w-full lg:w-3/4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                  <?php
-          include "connect.php";
-          include "./functions/userFunctions.php";
-
+          
           while ($row = $products->fetch_assoc()) {
             echo '
               <div class="product-card p-6 bg-white rounded-lg shadow-md flex flex-col items-center">

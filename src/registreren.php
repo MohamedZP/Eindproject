@@ -74,7 +74,7 @@ include "functions/userFunctions.php";
 	</div>
 	<div>
 		<label for="profilePicture" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Profielfoto:</label>
-		<input type="file" name="file" id="file" placeholder="image" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+		<input type="file" name="file" id="file" placeholder="image" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" accept="image/*" required="">
         </div>
         <div>
 		<label for="name" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Beschrijving:</label>
@@ -82,7 +82,7 @@ include "functions/userFunctions.php";
        	</div>
 		<button type="submit" name ="submit"class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Account aanmaken</button>
 		<br>
-		<div class="text-sm font-medium text-gray-500 dark:text-gray-300">Al een account?<a href="Login.php" class="text-blue-700 hover:underline dark:text-blue-500">Inloggen</a>
+		<div class="text-sm font-medium text-gray-500 dark:text-gray-300">Al een account?<a href="login.php" class="text-blue-700 hover:underline dark:text-blue-500">Inloggen</a>
 </div>
 </form>
 	

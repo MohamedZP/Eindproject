@@ -32,7 +32,7 @@
         </div>
       </label>
              <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a href="Login.php">Login</a><li>
+        <li><a href="login.php">Login</a><li>
         </ul>
        ';
        }else{
@@ -52,11 +52,11 @@
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a href="gegevensBekijken.php">Klanten bekijken</a></li>
                     <li><a href="productToevoegen.php">Product Toevoegen</a></li>
-                    <li><a href="BetalingenAdmin.php">Bestellingen van klanten</a></li>
-                    <li><a href="Dashboard.php">Dashboard</a></li>
+                    <li><a href="betalingenAdmin.php">Bestellingen van klanten</a></li>
+                    <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="verwijderdeK.php">Verwijderde klanten</a></li>
                     <li><a href="verwijderdeP.php">Verwijderde Producten</a></li>
-                    <li><a href="Loguit.php">Log uit</a></li>
+                    <li><a href="loguit.php">Log uit</a></li>
                 </ul>
     ';
 }

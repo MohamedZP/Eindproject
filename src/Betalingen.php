@@ -31,7 +31,7 @@
         </div>
       </label>
              <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a href="Login.php">Login</a><li>
+        <li><a href="login.php">Login</a><li>
         </ul>
        ';
  
@@ -51,12 +51,12 @@
       </label>  
                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                <li>
-          <a href = "Profiel.php" class="justify-between">Profiel</a>
+          <a href = "profiel.php" class="justify-between">Profiel</a>
         </li>
          <li>
-          <a href = "Betalingen.php" class="justify-between">Bestellingen</a>
+          <a href = "betalingen.php" class="justify-between">Bestellingen</a>
         </li>
-        <li><a href="Loguit.php">Log uit</a></li>
+        <li><a href="loguit.php">Log uit</a></li>
       </ul>
 
   ';

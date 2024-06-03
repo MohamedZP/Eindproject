@@ -27,13 +27,59 @@
   <div class="flex-1">
     <a href="index.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
   </div>
-    </div>
+    
+    <?php 
+      include "connect.php";
+      include "./functions/userFunctions.php";
+     session_start();      
+   
+        
+        if (!isset($_SESSION['login'])) {
+             echo '<div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img src="/public/img/profile_picture">
+        </div>
+      </label>
+             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="login.php">Login</a><li>
+        </ul>
+       ';
+ 
+       }else{
+       
+               echo '
+                <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">';
+
+           $userid = $_SESSION["login"];
+          $profielfoto = getProfilePicture($mysqli, $userid);
+          echo '<img src="../public/img/'.$profielfoto.'"/>';
+
+        echo '
+        </div>
+      </label>  
+               <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+               <li>
+          <a href = "profiel.php" class="justify-between">Profiel</a>
+        </li>
+         <li>
+          <a href = "betalingen.php" class="justify-between">Bestellingen</a>
+        </li>
+        <li><a href="loguit.php">Log uit</a></li>
+      </ul>
+
+  ';
+}
+
+
+?>
+  </div>        
+  </div>
+</div>
     <div class="container">
         <?php
-        include "connect.php";
-            include "./functions/userFunctions.php";
-            
-        session_start();
       
             if(!isset($_SESSION["login"])){
             header('location: index.php');
@@ -70,7 +116,7 @@ if (isset($_POST["submit"])) {
         
         echo '<div>
     
-    <form class="form-control h-full flex items-center justify-center" action="Profiel.php" method="post" enctype="multipart/form-data">
+    <form class="form-control h-full flex items-center justify-center" action="profiel.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="userid" value="'.$userid.'">
       <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
         <h2 class="text-black text-2xl mb-4">Profiel</h2>
@@ -105,7 +151,7 @@ if (isset($_POST["submit"])) {
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
               <label class="label text-black">Profiel foto</label>
-              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" value = "'.$row["profielfoto"].'" />
+              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" accept="image/*" value = "'.$row["profielfoto"].'" />
             </div>
           </div>
           ';

@@ -69,7 +69,7 @@ echo '<div>
     <div class="flex justify-start items-start">
       <a href="admin.php" class="btn btn-ghost normal-case text-xl text-black">MoWatch</a> 
     </div>
-    <form class="form-control h-full flex items-center justify-center" action="Wijzigen.php" method="post" enctype="multipart/form-data">
+    <form class="form-control h-full flex items-center justify-center" action="wijzigen.php" method="post" enctype="multipart/form-data">
       <input type="hidden" name="productid" value="'.$productid.'"">
       <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
         <h2 class="text-black text-2xl mb-4">Product Wijzigen</h2>
@@ -93,7 +93,7 @@ echo '<div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
               <label class="label text-black">Productfoto</label>
-              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" value = "'.$row["foto"].'" />
+              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" accept="image/*" value = "'.$row["foto"].'" />
             </div>
           </div>
           <div class="flex flex-row gap-2">

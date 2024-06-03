@@ -55,7 +55,7 @@ if (isset($_GET['productid'])) {
 	 
 
 <div class="col-lg-6 col-md-12 col-12">
-	<h6>Men watch</h6>
+	<h6>Horloge</h6>
 	<h3 class="py-4">'.$row['naam'].'</h3>
 	<h2>€ '.$row['prijs'].'</h2>
 	<form method="post" action="cart.php">
@@ -64,9 +64,9 @@ if (isset($_GET['productid'])) {
 	<input type="hidden" name="name" value="'.$row['naam'].'">
 	<input type="hidden" name="price" value="'.$row['prijs'].'">
 	<input type="number" name = "quantity" value="1" min = 1>
-	<button class="buy-btn" type = "submit" name = "add_to_cart">Add to Cart</button>
+	<button class="buy-btn" type = "submit" name = "add_to_cart">In winkelwagen</button>
 	</form>
-	<h4 class="mt-5 mb-5">Product details</h4>
+	<h4 class="mt-5 mb-5">Product beschrijving</h4>
 	<span> '.$row['beschrijving'].'</span>
 </div>
 

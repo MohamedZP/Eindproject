@@ -94,9 +94,9 @@ if (mysqli_num_rows($result) <= 0) {
 
     $sql5 = "INSERT INTO tblcart (productid, gebruikerid, aantal, prijs ) VALUES ('".$_POST['productid']."','".$_SESSION['login']."','" .$_POST['quantity']."','".$_POST['price']."')";
     if ($mysqli -> query($sql5)) {
-      echo "<script>alert('Product is toegevoegd');</script>";;
+      echo "<script>alert('Product is toegevoegd');</script>";
     } else{
-      var_dump($sql5);
+      echo "<script>alert('Product is niet toegevoegd');</script>";
     }
   } 
   calculateTotalCart();    
@@ -132,7 +132,7 @@ if (mysqli_num_rows($result) <= 0) {
         </div>
       </label>
              <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a href="Login.php">Login</a><li>
+        <li><a href="login.php">Login</a><li>
         </ul>
        ';
  
@@ -152,17 +152,17 @@ if (mysqli_num_rows($result) <= 0) {
       </label>  
                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                <li>
-          <a href = "Profiel.php" class="justify-between">
+          <a href = "profiel.php" class="justify-between">
             Profiel
             
           </a>
         </li>
         <li>
-          <a href = "Betalingen.php" class="justify-between">
+          <a href = "betalingen.php" class="justify-between">
             Betalingen
           </a>
         </li>
-        <li><a href="Loguit.php">Log uit</a></li>
+        <li><a href="loguit.php">Log uit</a></li>
       </ul>
 
   ';
