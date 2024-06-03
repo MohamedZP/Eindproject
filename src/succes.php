@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'connect.php';
-$_SESSION['datum'] = date("Y-m-d H:i:s");
+$_SESSION['datum'] = date("Y-m-d H:i:s", strtotime('+2 hours'));
 
 $query = "SELECT * from tblcart where gebruikerid ='".$_SESSION['login']."'";
 

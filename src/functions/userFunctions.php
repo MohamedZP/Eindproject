@@ -30,8 +30,8 @@ function convertPasswordToHash($password){
     return $hashedpassword;
 
 }   
-function checkIfAdmin($connection, $email, $wachtwoord){
-    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '" . $email . "' AND wachtwoord = '" . $wachtwoord . "'  AND admin=1");
+function checkIfAdmin($connection, $email){
+    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '" . $email . "'  AND admin=1");
     return ($resultaat->num_rows == 0) ? false : $resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
@@ -75,7 +75,7 @@ function getProductCategorie($connection, $productID){
 function getProductPicture($connection,$productID) {
     return getProduct($connection,$productID)->fetch_assoc()['foto'];
 }
-function addProduct($connection,$naam, $beschrijving, $prijs, $categorie,$kleur ,$foto){
-    return($connection ->query("INSERT INTO tblproducten (naam, beschrijving, prijs, categorie,kleur, foto ) VALUES ('".$naam."','".$beschrijving."','" .$prijs."','" .$categorie."','".$kleur."','".$foto."')"));
+function addProduct($connection,$naam, $beschrijving, $prijs, $categorie,$kleur ,$foto, $verwijderd){
+    return($connection ->query("INSERT INTO tblproducten (naam, beschrijving, prijs, categorie,kleur, foto,Verwijderd ) VALUES ('".$naam."','".$beschrijving."','" .$prijs."','" .$categorie."','".$kleur."','".$foto."',0)"));
 }
 ?>

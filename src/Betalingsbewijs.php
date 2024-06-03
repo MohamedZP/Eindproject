@@ -12,6 +12,9 @@
 <?php  
 session_start();
 include 'connect.php';
+if (!isset($_SESSION['datum'])) {
+    header('Location: index.php');
+}
 
 $totalprijs = 0;
 
@@ -31,7 +34,7 @@ echo '<div class="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-aut
     <div class="flex justify-between mb-6">
         <h1 class="text-lg font-bold">Factuur</h1>
         <div class="text-gray-700">
-            <div>Datum: '.date("Y-m-d H:i:s").'</div>
+            <div>Datum: '.date("Y-m-d H:i:s", strtotime('+2 hours')) .'</div>
             <div>Factuur : INV12345</div>
         </div>
     </div>
@@ -65,7 +68,7 @@ echo'
             echo '<tr>
                 <td class="text-left text-gray-700 pt-2">'.$row['productnaam'].'</td>
                 <td class="text-center text-gray-700 pt-2"> '.$row['quantity'].'</td>
-                <td class="text-right text-gray-700 pt-2">'.$row['totaal'].'</td>
+                <td class="text-right text-gray-700 pt-2">€'.$row['totaal'].'</td>
             </tr>';
         };
 
@@ -77,7 +80,7 @@ echo'
             <tr>
                 <td class="text-left font-bold text-gray-700 pt-8">Totaal</td>
                 <td class="text-center font-bold text-gray-700 pt-8">    </td>
-                <td class="text-right font-bold text-gray-700 pt-8">'.calculateTotal($totalprijs).'</td>
+                <td class="text-right font-bold text-gray-700 pt-8">€'.calculateTotal($totalprijs).'</td>
             </tr>
         </tfoot>
     </table>

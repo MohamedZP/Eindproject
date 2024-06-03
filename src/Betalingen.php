@@ -51,17 +51,12 @@
       </label>  
                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                <li>
-          <a href = "Profiel.php?gebruikerid='.$userid.'" class="justify-between">
-            Profiel
-            <span class="badge">New</span>
-          </a>
+          <a href = "Profiel.php" class="justify-between">Profiel</a>
         </li>
          <li>
-          <a href = "Betalingen.php?gebruikerid='.$userid.'" class="justify-between">
-            Bestellingen
-          </a>
+          <a href = "Betalingen.php" class="justify-between">Bestellingen</a>
         </li>
-        <li><a href="Loguit.php">Logout</a></li>
+        <li><a href="Loguit.php">Log uit</a></li>
       </ul>
 
   ';
@@ -84,7 +79,7 @@ $query = "SELECT * from tblaankoop where gebruikerid ='".$_SESSION['login']."'";
             	
         <div class="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             <div class="flex justify-start item-start space-y-2 flex-col">
-                <h1 class="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Bestelling '.$row['aankoopid'].'</h1>
+                <h1 class="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Bestelling</h1>
                 <p class="text-base dark:text-gray-300 font-medium leading-6 text-gray-600">'.$row['datum'].'</p>
             </div> 
             <div class="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">

@@ -18,45 +18,90 @@
 }
 
 if (isset($_POST['submit'])) {
-	 if(checkIfAdmin($mysqli,$_POST['email'],$_POST['password'])){
-                $_SESSION["admin"] = "true";
-                $_SESSION['gebruikersid'] = getGebruikersid($mysqli,$_POST['email']);
-               	$_SESSION["login"]= $_SESSION['gebruikersid'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Check if the user is an admin
+    if (checkIfAdmin($mysqli, $email)) {
+        $_SESSION["admin"] = "true";
+        $_SESSION['gebruikersid'] = getGebruikersid($mysqli, $email);
+        $_SESSION["login"] = $_SESSION['gebruikersid'];
+        $_SESSION['wachtwoord2'] = $password;
+
+        $sql = "SELECT * FROM tblgebruikers WHERE email=? AND verwijderd = 0 AND admin = 1";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $resultaat = $stmt->get_result()->fetch_assoc();
+
+        if ($resultaat) {
+            $correct = password_verify($password, $resultaat['wachtwoord']);
+
+            if ($correct) {
                 header('Location: admin.php');
-	}else {
+                exit;
+            } else {
+                // Show an error message for incorrect password
+                 echo '<div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Foute wachtwoord.</span>
+            </div> ';
+            }
+        } else {
+            // Show an error message if the user is not found or not an admin
+            echo '<div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Error! Je hebt de verkeerde gegevens ingevuld. Probeer het opnieuw.</span>
+            </div> ';
+        }
+    } else {
+        //  users not admin
+        $_SESSION['email'] = $email;
+        $_SESSION['wachtwoord'] = $password;
 
-if(isset($_POST['submit'])){
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['wachtwoord'] = $_POST['password'];
-    $sql = ("SELECT * FROM tblgebruikers WHERE email='".$_POST['email']."' and verwijderd = 0");
-   		$resultaat = $mysqli->query($sql);
-   		$resultaat = $resultaat->fetch_assoc();
-			if($resultaat) {
-				$correct = password_verify($_POST['password'], $resultaat['wachtwoord']);
+        $query = "SELECT * FROM tblgebruikers WHERE email=? AND verwijderd = 0";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $resultaat2 = $stmt->get_result()->fetch_assoc();
 
+        if ($resultaat2) {
+            $correct2 = password_verify($password, $resultaat2['wachtwoord']);
 
-					if (!$correct) {
-						header('Location: Login.php');
-						exit;
-					}
-					$_SESSION['gebruikersid'] = getGebruikersid($mysqli,$_POST['email']);
-          $_SESSION["login"]= $_SESSION['gebruikersid'] ;
-					
-					echo "je bent ingelogd";
-					header("Location: index.php");
-				
-				} else {
-					echo '
-				<div role="alert" class="alert alert-error">
-  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-  <span>Error! Je hebt de verkeerde gegevens ingevuld.
-  						Probeer het opnieuw.</span>
-</div>
-					 ';
-			}
+            if ($correct2) {
+                $_SESSION['gebruikersid'] = getGebruikersid($mysqli, $email);
+                $_SESSION["login"] = $_SESSION['gebruikersid'];
+
+                echo "je bent ingelogd";
+                header('Location: index.php');
+                exit;
+            } else {
+                // Show an error message for incorrect password
+                 echo '<div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Foute wachtwoord.</span>
+            </div> ';
+            }
+        } else {
+            // Show an error message if the user is not found
+            echo '
+            <div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Error! Je hebt de verkeerde gegevens ingevuld. Probeer het opnieuw.</span>
+            </div>
+            ';
+        }
     }
 }
-  } 
+  
 ?>
 
 	

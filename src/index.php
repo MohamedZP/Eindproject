@@ -5,11 +5,11 @@ include 'connect.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>MoWatch</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoWatch</title>
   <link rel="stylesheet" type="text/css" href="profile.css">
-	<link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@ include 'connect.php';
     <a href="index.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
   </div>
   <div class="flex-1">
-    <a href="productenBekijken.php" class="menu menu-horizontal px-26 text-xl">Products</a>
+    <a href="productenBekijken.php" class="menu menu-horizontal px-26 text-xl">Producten</a>
   </div>
  
   <div class="flex-none">
@@ -74,10 +74,10 @@ if ($stmt) {
 
           }
         }
-             ?> Items</span>
+             ?> Artikelen</span>
           <span class="text-info"></span>
           <div class="card-actions">
-            <button class="btn btn-primary btn-block">  <a href="cart.php">View cart</a> </button>
+            <button class="btn btn-primary ">  <a href="cart.php">Winkelwagen</a> </button>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@ if ($stmt) {
              echo '<div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img src="/Eindproject/public/img/profile_picture">
+          <img src="/public/img/profile_picture.jpg">
         </div>
       </label>
              <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -106,8 +106,9 @@ if ($stmt) {
                 <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">';
+          
+        $userid = $_SESSION["login"];
 
-           $userid = $_SESSION["login"];
           $profielfoto = getProfilePicture($mysqli, $userid);
           echo '<img src="../public/img/'.$profielfoto.'"/>';
 
@@ -116,17 +117,12 @@ if ($stmt) {
       </label>  
                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 mb-2 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                <li>
-          <a href = "Profiel.php?gebruikerid='.$userid.'" class="justify-between">
-            Profiel
-            <span class="badge">New</span>
-          </a>
+          <a href = "Profiel.php" class="justify-between">Profiel</a>
         </li>
         <li>
-          <a href = "Betalingen.php?gebruikerid='.$userid.'" class="justify-between">
-            Bestellingen
-          </a>
+          <a href = "Betalingen.php" class="justify-between">Bestellingen</a>
         </li>
-        <li><a href="Loguit.php">Logout</a></li>
+        <li><a href="Loguit.php">Log uit</a></li>
       </ul>
 
   ';
@@ -139,11 +135,11 @@ if ($stmt) {
 </div>
 
 
-  <div class="hero-image">
-  <div class="hero-content text-center text-neutral-content">
-    <div class="max-w-md">
-      <h1 class="mt-14 text-5xl font-bold ">Hello there</h1>
-      <p class="mt-14">Bekijk hier de beste horloges in het land.
+  <div class="hero-image w-full">
+  <div class="hero-content text-center text-neutral-content w-full mx-auto">
+    <div class="text-center text-neutral-content mx-auto pt-14">
+      <h1 class="mt-14 text-5xl font-bold text-center text-neutral-content">Hello there</h1>
+      <p class="mt-14 text-center text-neutral-content">Bekijk hier de beste horloges in het land.
       Voor een aantrekkelijke prijs.</p>
       
       <a href="productenBekijken.php"><button class="btn btn-primary mt-14">Shop now</button></a>

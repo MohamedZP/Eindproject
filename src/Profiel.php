@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Profiel Pagina</title>
-	<link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdn.tailwindcss.com"></script>
-	  <style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profiel Pagina</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+    <style>
         body {
             font-family: Arial, sans-serif;
         }
@@ -23,18 +23,18 @@
     </style>
 </head>
 <body>
-	<div class="navbar bg-base-100">
-	<div class="flex-1">
+  <div class="navbar bg-base-100">
+  <div class="flex-1">
     <a href="index.php" class="btn btn-ghost normal-case text-xl">MoWatch</a>
   </div>
     </div>
     <div class="container">
         <?php
-    		include "connect.php";
+        include "connect.php";
             include "./functions/userFunctions.php";
             
-    		session_start();
-    	
+        session_start();
+      
             if(!isset($_SESSION["login"])){
             header('location: index.php');
             }
@@ -64,7 +64,7 @@ if (isset($_POST["submit"])) {
 
 
 }
-    $userid = $_GET['gebruikerid'];
+    $userid = $_SESSION["login"];
     foreach(getUser($mysqli,$userid) as $row){
 
         
