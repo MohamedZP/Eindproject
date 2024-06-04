@@ -163,7 +163,7 @@
                 <p class="text-gray-700 mb-4 text-center">'.$row['beschrijving'].'</p>
                 <div class="mt-auto text-center">
                   <span class="text-xl font-bold text-green-600 block mb-2">€'.$row['prijs'].'</span>
-                  <a href="Singleproduct.php?productid='.$row["productid"].'" class="btn btn-primary">In winkelwagen</a>
+                  <a href="singleproduct.php?productid='.$row["productid"].'" class="btn btn-primary">In winkelwagen</a>
                 </div>
               </div>
             ';
