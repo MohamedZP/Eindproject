@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
 	<div  class="  col-start-2 my-10 mx-0">
 		<div
 		class="bg-white shadow-md border border-gray-200 rounded-lg max-w-screen-2xl p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-		<form class="space-y-8" action="Login.php" method="post">
+		<form class="space-y-8" action="login.php" method="post">
 			<h3 class=" text-xl font-medium text-gray-900 dark:text-white ml-14 pr-12 w-80 h-16 p-7">Log in op onze website</h3>
 			<div>
 				<label for="email" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Email:</label>
