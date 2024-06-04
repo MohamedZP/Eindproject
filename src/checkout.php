@@ -105,7 +105,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
 
         "http://mohamed/Eindproject/src/succes.php?session_id={CHECKOUT_SESSION_ID}&userid={$id}",
 
-    "cancel_url" => "http://mohamed/Eindproject/src/Cart.php",
+    "cancel_url" => "http://mohamed/Eindproject/src/cart.php",
 
     "billing_address_collection" => "required",
 
